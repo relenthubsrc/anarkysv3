@@ -11,7 +11,7 @@ function getudim(udim) local g = tostring(udim) local g2 = {' ','{','}'} for a,v
 function makeborder(obj,size,color,additional) local d2 = getudim(obj.Size) local d = clone(obj,obj,{ImageColor3 = color,Size = udim2(d2.x,d2.x2-size,d2.y,d2.y2-size),Position = udim2(0.5,(-d2.x2/2)+(size/2),0.5,(-d2.y2/2)+(size/2))}) if additional then for a,v in next, additional do d[a] = v end end return d end
 getgenv().themes = {
     dark = {
-            cmdBar = rgb(13,13,13),
+            cmdBar = rgb(0,3,16),
             cmdFont = Enum.Font.Code,
             cmdTextColor = rgb(255,255,255),
             cmdTextSize = 22,
