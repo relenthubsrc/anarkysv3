@@ -15,7 +15,7 @@ getgenv().themes = {
             cmdFont = Enum.Font.Code,
             cmdTextColor = rgb(255,255,255),
             cmdTextSize = 22,
-            infoFrame1 = rgb(25,25,25),
+            infoFrame1 = rgb(0,3,16),
             colorSequence =  ColorSequence.new({
                 ColorSequenceKeypoint.new(0,rgb(171,171,171)),
                 ColorSequenceKeypoint.new(1,rgb(255,255,255))
