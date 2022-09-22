@@ -20,7 +20,7 @@ getgenv().themes = {
                 ColorSequenceKeypoint.new(0,rgb(171,171,171)),
                 ColorSequenceKeypoint.new(1,rgb(255,255,255))
             }),
-            infoFrame2 = rgb(13,13,13),
+            infoFrame2 = rgb(0,3,16),
             infoText1Color = rgb(255,255,255),
             infoText1Font = Enum.Font.Gotham,
             infoText1TSize = 14,
@@ -28,7 +28,7 @@ getgenv().themes = {
             infoText2TSize = 15,
             infoText2Font = Enum.Font.SourceSans,
             inputAwaitingImage = 'rbxassetid://2122740641',
-            suggestionBackFrameColor = rgb(25,25,25),
+            suggestionBackFrameColor = rgb(0,3,16),
             correctionFrame = rgb(25,25,25),
             suggestionTextColor = rgb(13,13,13),
             suggestionTextFont = Enum.Font.Gotham,
