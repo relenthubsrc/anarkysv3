@@ -49,7 +49,7 @@ getgenv().themes = {
             ColorSequenceKeypoint.new(0,rgb(171,171,171)),
             ColorSequenceKeypoint.new(1,rgb(255,255,255))
         }),
-        infoFrame2 = rgb(200,222,218),
+        infoFrame2 = rgb(0,3,16),
         infoText1Color = rgb(14,26,64),
         infoText1Font = Enum.Font.Gotham,
         infoText1TSize = 14,
