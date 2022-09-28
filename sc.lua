@@ -400,6 +400,28 @@ Cyclone:createCommand("respawn", "respawn", "Respawn your character", function(c
 	Instance.new("Humanoid", char)
 	LocalPlayer.Character = char
 end)
+Cyclone:createCommand("rifle", "rifle", "Turns your boomboxes into a rifle", function(cmdParameters)
+	createNotif("Respawning your Character...", CustomEnum.NotifcationType.Normal)
+	LocalPlayer.Character:ClearAllChildren()
+	local char = Instance.new("Model", workspace)
+	Instance.new("Humanoid", char)
+	LocalPlayer.Character = char
+end)
+Cyclone:createCommand("lh", "lh", "Holds your boombox lower", function(cmdParameters)
+	for i, v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+        v:Stop()
+    end
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if string.find(string.lower(v.Name), 'boomb') then
+            v.Grip = CFrame.new(-0.0109999999, 0.633000016, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+            v.Parent = game.Players.LocalPlayer.Backpack
+            v.Parent = game.Players.LocalPlayer.Character
+            v.Handle.Massless = true
+
+        end
+
+    end
+end)
 Cyclone:createCommand("kidnap", "kidnap", "Enables Kidnap (walk up to someone and press T)", function(cmdParameters)
 	createNotif("Kidnap enabled!", CustomEnum.NotifcationType.Normal)
 	game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
@@ -1077,6 +1099,15 @@ Cyclone:createCommand("antikill", "antikill", "Enables Anti-Kill", function(cmdP
 	game.Players.LocalPlayer.Character.Humanoid.Sit = true
 	game:GetService('RunService').RenderStepped:Wait()
     createNotif("Anti-Kill Enabled", CustomEnum.NotifcationType.Normal)
+end)
+Cyclone:createCommand("lvoid", "lvoid", "Rescales leg, then voids target (kinda bad)", function(cmdParameters)
+    createNotif("use cmd bar idiott", CustomEnum.NotifcationType.Normal)
+end)
+Cyclone:createCommand("lvoid2", "lvoid2", "Rescales leg, then voids target (better)", function(cmdParameters)
+    createNotif("use cmd bar idiott", CustomEnum.NotifcationType.Normal)
+end)
+Cyclone:createCommand("explode", "explode", "Fancy explosion refresh", function(cmdParameters)
+    createNotif("use cmd bar idiott", CustomEnum.NotifcationType.Normal)
 end)
 Cyclone:createCommand("antivoid", "antivoid", "Enables Anti-Void", function(cmdParameters)
 	local AcceptedTools = {}
@@ -2215,6 +2246,138 @@ local p = game:GetService("Players").LocalPlayer
  
 
 ts:Teleport(game.PlaceId, p)
+    print(bool)
+end})
+Admin2.addCommand({name = "rifle",desc = "Turns your boomboxes into a rifle",callback = function(bool)
+    
+
+    local num = 0
+    local bp = game.Players.LocalPlayer.Backpack
+    for i,v in pairs(bp:GetChildren()) do
+        num = num + 1
+        v.Name =  num
+    end
+    wait(0.15)
+    local POS1 = game.Players.LocalPlayer.Backpack["1"]
+    local POS2 = game.Players.LocalPlayer.Backpack["2"]
+    local POS3 = game.Players.LocalPlayer.Backpack["3"]
+    local POS4 = game.Players.LocalPlayer.Backpack["4"]
+    local POS5 = game.Players.LocalPlayer.Backpack["5"]
+    local POS6 = game.Players.LocalPlayer.Backpack["6"]
+    local POS7 = game.Players.LocalPlayer.Backpack["7"]
+    local POS8 = game.Players.LocalPlayer.Backpack["8"]
+    local POS9 = game.Players.LocalPlayer.Backpack["9"]
+    local POS10 = game.Players.LocalPlayer.Backpack["10"]
+    local POS11 = game.Players.LocalPlayer.Backpack["11"]
+    local POS12 = game.Players.LocalPlayer.Backpack["12"]
+    local POS13 = game.Players.LocalPlayer.Backpack["13"]
+    local POS14 = game.Players.LocalPlayer.Backpack["14"]
+    local POS15 = game.Players.LocalPlayer.Backpack["15"]
+    local POS16 = game.Players.LocalPlayer.Backpack["16"]
+    local POS17 = game.Players.LocalPlayer.Backpack["17"]
+    local POS18 = game.Players.LocalPlayer.Backpack["18"]
+    local POS19 = game.Players.LocalPlayer.Backpack["19"]
+
+    POS1.GripPos = Vector3.new(-2.193, -1.25, 0) -- MAIN POS
+    POS1.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS1.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS1.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+    POS2.GripPos = Vector3.new(1.709, 1.957, 0) -- MAIN POS
+    POS2.GripRight = Vector3.new(0, -0, 1) -- RIGHT
+    POS2.GripUp = Vector3.new(-0.012, -1, 0) -- UP
+    POS2.GripForward = Vector3.new(-1, 0.012, 0) -- FORWARD
+
+    POS3.GripPos = Vector3.new(-4.401, -0.662, -0) -- MAIN POS
+    POS3.GripRight = Vector3.new(-0, 0, 1) -- RIGHT
+    POS3.GripUp = Vector3.new(0.16, 0.987, 0) -- UP
+    POS3.GripForward = Vector3.new(0.987, -0.16, 0) -- FORWARD
+
+    POS4.GripPos = Vector3.new(-2.768, -2.295, 0) -- MAIN POS
+    POS4.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS4.GripUp = Vector3.new(-0.908, 0.419, 0) -- UP
+    POS4.GripForward = Vector3.new(0.419, 0.908, -0) -- FORWARD
+
+    POS5.GripPos = Vector3.new(3.527, 1.972, 0) -- MAIN POS
+    POS5.GripRight = Vector3.new(0, -0, 1) -- RIGHT
+    POS5.GripUp = Vector3.new(-0.008, -1, 0) -- UP
+    POS5.GripForward = Vector3.new(-1, 0.008, 0) -- FORWARD
+
+    POS6.GripPos = Vector3.new(-0.179, 6.226, 0) -- MAIN POS
+    POS6.GripRight = Vector3.new(-0, 0, 1) -- RIGHT
+    POS6.GripUp = Vector3.new(-0.995, -0.1, -0) -- UP
+    POS6.GripForward = Vector3.new(-0.1, 0.995, -0) -- FORWARD
+
+    POS7.GripPos = Vector3.new(5.899, 2.021, 0) -- MAIN POS
+    POS7.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS7.GripUp = Vector3.new(0, -1, 0) -- UP
+    POS7.GripForward = Vector3.new(-1, 0, 0) -- FORWARD
+
+    POS8.GripPos = Vector3.new(4.954, -1.25, 0) -- MAIN POS
+    POS8.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS8.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS8.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+    POS9.GripPos = Vector3.new(-0.246, -1.25, 0) -- MAIN POS
+    POS9.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS9.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS9.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+    POS10.GripPos = Vector3.new(-13.816, -1.649, 0) -- MAIN POS
+    POS10.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS10.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS10.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+    POS11.GripPos = Vector3.new(2.664, -1.25, 0) -- MAIN POS
+    POS11.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS11.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS11.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+    POS12.GripPos = Vector3.new(3.696, -4.204, -0) -- MAIN POS
+    POS12.GripRight = Vector3.new(0, -0, 1) -- RIGHT
+    POS12.GripUp = Vector3.new(0.685, 0.728, -0) -- UP
+    POS12.GripForward = Vector3.new(0.728, -0.685, -0) -- FORWARD
+
+    POS13.GripPos = Vector3.new(7.473, 3.85, -0) -- MAIN POS
+    POS13.GripRight = Vector3.new(-0, -0, 1) -- RIGHT
+    POS13.GripUp = Vector3.new(0.265, -0.964, 0) -- UP
+    POS13.GripForward = Vector3.new(-0.964, -0.265, -0) -- FORWARD
+
+    POS14.GripPos = Vector3.new(0.422, -0.982, 0) -- MAIN POS
+    POS14.GripRight = Vector3.new(-0, 0, 1) -- RIGHT
+    POS14.GripUp = Vector3.new(0.972, 0.234, 0) -- UP
+    POS14.GripForward = Vector3.new(0.234, -0.972, 0) -- FORWARD
+
+    POS15.GripPos = Vector3.new(-0.599, -2.667, 0) -- MAIN POS
+    POS15.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS15.GripUp = Vector3.new(-0.979, 0.205, 0) -- UP
+    POS15.GripForward = Vector3.new(0.205, 0.979, -0) -- FORWARD
+
+    POS16.GripPos = Vector3.new(-11.727, -1.663, 0) -- MAIN POS
+    POS16.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS16.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS16.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+    POS17.GripPos = Vector3.new(-6.742, -1.338, 0) -- MAIN POS
+    POS17.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS17.GripUp = Vector3.new(0.044, 0.999, 0) -- UP
+    POS17.GripForward = Vector3.new(0.999, -0.044, 0) -- FORWARD
+
+    POS18.GripPos = Vector3.new(0.146, 1.615, 0) -- MAIN POS
+    POS18.GripRight = Vector3.new(-0, 0, 1) -- RIGHT
+    POS18.GripUp = Vector3.new(-0.401, -0.916, -0) -- UP
+    POS18.GripForward = Vector3.new(-0.916, 0.401, -0) -- FORWARD
+
+    POS19.GripPos = Vector3.new(-9.3, -1.675, 0) -- MAIN POS
+    POS19.GripRight = Vector3.new(0, 0, 1) -- RIGHT
+    POS19.GripUp = Vector3.new(0, 1, 0) -- UP
+    POS19.GripForward = Vector3.new(1, 0, 0) -- FORWARD
+
+        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+if v:IsA("Tool") then
+v.Parent = game.Players.LocalPlayer.Character
+end
+end
     print(bool)
 end})
 Admin2.addCommand({name = "rjre",desc = "Rejoins the server in same Character pos",callback = function(bool)
