@@ -3675,6 +3675,7 @@ Admin2.addCommand({name = "void",desc = "Voids the target",callback = function(v
         repeat task.wait() until LocalPlayer.Character
         game.Workspace.Gravity = 200
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+        createNotif("Voided Target!", CustomEnum.NotifcationType.Normal)
         end)
     end
     if b then
@@ -3684,7 +3685,174 @@ Admin2.addCommand({name = "void",desc = "Voids the target",callback = function(v
         m:Destroy()
     end
 end})
-Admin2.addCommand({name = "lvoid",desc = "Rescales leg, then voids target",callback = function(v,b)
+Admin2.addCommand({name = "lvoid2",desc = "Better leg void",callback = function(v,b)
+    local t = Admin2.getplayers(v)
+    for i,v2 in pairs(t) do
+        pcall(function()
+           -- \\ void by legendary#0001 | edited by Anarky#5844
+
+-- \\ credits to i_db for the resize
+
+local ps = game:GetService('Players')
+
+local touch = firetouchinterest
+
+local cf = ps.LocalPlayer.Character.HumanoidRootPart.CFrame or chr.HumanoidRootPart.CFrame
+
+local lp = ps.LocalPlayer or game.Players.LocalPlayer
+
+local chr = lp.Character
+
+local hum = chr.Humanoid:Clone()
+    
+local function delete()
+    
+chr.LeftFoot:WaitForChild'OriginalSize':Destroy()
+
+chr.LeftLowerLeg:WaitForChild'OriginalSize':Destroy()
+            
+chr.LeftUpperLeg:WaitForChild'OriginalSize':Destroy()
+        
+end
+        
+chr.LeftLowerLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
+        
+chr.LeftUpperLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
+        
+chr.LeftLowerLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
+
+chr.LeftUpperLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
+        
+for i,v in next, chr.Humanoid:GetChildren() do
+    if v:IsA'NumberValue' then
+        delete()
+    v:Destroy()
+    end
+end
+
+for _, v in next, ps:GetPlayers() do
+        
+        workspace.FallenPartsDestroyHeight = 0 / 0
+        
+        chr.Humanoid:Remove()
+        
+        hum.Parent = chr
+        
+        for i,x in pairs(lp.Backpack:GetChildren()) do
+    
+        if x:IsA('Tool') then
+        
+        chr.Humanoid:EquipTool(lp.Backpack:FindFirstChildOfClass('Tool'))
+        
+        ps.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new( 0, -499, 0))
+    
+        touch(x.Handle, v2.Character.Head, 0)
+        
+        workspace.FallenPartsDestroyHeight = -506
+        
+            end
+        end
+    end
+
+lp.CharacterAdded:Wait()
+
+repeat task.wait() until chr
+
+lp.Character:WaitForChild'HumanoidRootPart'.CFrame = cf 
+    createNotif("Leg Voided Target!", CustomEnum.NotifcationType.Normal)
+        end)
+    end
+    if b then
+        local m = Instance.new("Message",workspace)
+        m.Text = "Cheese!"
+        wait(1)
+        m:Destroy()
+    end
+end})
+Admin2.addCommand({name = "mdvoid",desc = "Mass Depth Void",callback = function(v,b)
+    local t = Admin2.getplayers(v)
+    for i,v2 in pairs(t) do
+        pcall(function()
+            errorsound:Play()
+    createNotif("This command is currently broken, please wait for a fix!", CustomEnum.NotifcationType.Error)
+            settings()['Physics'].AllowSleep = false
+            settings()['Physics'].PhysicsEnvironmentalThrottle = Enum['EnviromentalPhysicsThrottle'].Disabled
+            setscriptable(v2.Character, "SimulationRadius", true)
+            local Char = game.Players.LocalPlayer.Character
+            game.Players.LocalPlayer.Character = Clone
+            game.Players.LocalPlayer.Character = Char
+            wait(4.25)
+            game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+            game.Players.LocalPlayer.Character.Humanoid.Sit = true
+            local function delete()
+                game.Players.LocalPlayer.Character.LeftFoot:WaitForChild'OriginalSize':Destroy()
+                game.Players.LocalPlayer.Character.LeftLowerLeg:WaitForChild'OriginalSize':Destroy()
+                game.Players.LocalPlayer.Character.LeftUpperLeg:WaitForChild'OriginalSize':Destroy()
+            end
+            game.Players.LocalPlayer.Character.LeftLowerLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
+            game.Players.LocalPlayer.Character.LeftUpperLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
+            game.Players.LocalPlayer.Character.LeftLowerLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
+            game.Players.LocalPlayer.Character.LeftUpperLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
+            for i,v in next, game.Players.LocalPlayer.Character.Humanoid:GetChildren() do
+                if v:IsA'NumberValue' then
+                    delete()
+                    v:Destroy()
+                end
+            end
+            local saveCF = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            local LocalPlayer = game.Players.LocalPlayer
+            local newHum = LocalPlayer.Character.Humanoid:Clone()
+            newHum.Parent = LocalPlayer.Character
+            LocalPlayer.Character.Humanoid:Destroy()
+            for i,v in next, LocalPlayer.Backpack:GetChildren() do
+                if v:IsA'Tool' then
+                    v.Parent = LocalPlayer.Character
+                end
+            end
+            local tool = LocalPlayer.Character:FindFirstChildOfClass'Tool'
+            target.SimulationRadius = 0
+            firetouchinterest(tool.Handle, v2.Character.Head, 0)
+            local start
+            local connection = v2.Character.Humanoid.Died:Connect(function()
+                start = tick()
+                warn("Void successful! Took: " .. tick() - start)
+            end)
+            local save = {}
+            for i,v in next, workspace:GetChildren() do
+                if v:IsA'Model' then
+                    if not game.Players:GetPlayerFromCharacter(v) then
+                        save[#save + 1] = v
+                    end
+                else
+                    if v.ClassName == "Part" then
+                        save[#save + 1] = v
+                    end
+                end
+            end
+            for i,v in next, save do
+                v.Parent = game.Lighting
+            end
+            local BP = Instance.new("BodyPosition", game.Players.LocalPlayer.Character.HumanoidRootPart)
+            BP.Position = Vector3.new(0, -4500, 0)
+            BP.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            BP.P = 6000
+            game.Players.LocalPlayer.CharacterAdded:Wait()
+            game.Players.LocalPlayer.Character:WaitForChild'ForceField':Destroy()
+            game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart').CFrame = saveCF
+            connection:Disconnect()
+            for i,v in next, save do
+                v.Parent = workspace
+            end
+        end)
+    end
+    if b then
+        local m = Instance.new("Message",workspace)
+        m.Text = "Cheese!"
+        wait(1)
+        m:Destroy()
+    end
+end})
+Admin2.addCommand({name = "lvoid",desc = "Rescales leg, then voids target (kinda bad)",callback = function(v,b)
     local t = Admin2.getplayers(v)
     for i,v2 in pairs(t) do
         pcall(function()
@@ -3735,6 +3903,7 @@ game.Players.LocalPlayer.Character.Humanoid.Health = 0
 firetouchinterest(tool.Handle, v2.Character.Head, math.huge)
 
 end
+createNotif("Leg Voided Target!", CustomEnum.NotifcationType.Normal)
         end)
     end
     if b then
@@ -3875,72 +4044,6 @@ end})
 Admin2.addCommand({name = "savegamens",desc = "Saves the game without scripts",callback = function(v,b)
     createNotif("Saving game to workspace folder...", CustomEnum.NotifcationType.Normal)
     saveinstance({noscripts = false})
-end})
-Admin2.addCommand({name = "mdvoid",desc = "Rescales, then voids target",callback = function(v,b)
-    local t = Admin2.getplayers(v)
-    for i,v2 in pairs(t) do
-        pcall(function()
-            game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-game.Players.LocalPlayer.Character.Humanoid.Sit = false
-
-for i,v in next, game.Players.LocalPlayer.Character.Humanoid:GetChildren() do
-    if v:IsA'NumberValue' then
-        delete()
-        v:Destroy()
-    end
-end
-
-local LocalPlayer = game.Players.LocalPlayer
-local newHum = LocalPlayer.Character.Humanoid:Clone()
-newHum.Parent = LocalPlayer.Character
-LocalPlayer.Character.Humanoid:Destroy()
-for i,v in next, LocalPlayer.Backpack:GetChildren() do
-    if v:IsA'Tool' then
-        v.Parent = LocalPlayer.Character
-    end
-end
-local tool = LocalPlayer.Character:FindFirstChildOfClass'Tool'
-firetouchinterest(tool.Handle, v2.Character.Head, 0)
-local start
-local connection = v2.Character.Humanoid.Died:Connect(function()
-    start = tick()
-    warn("Void successful! Took: " .. tick() - start)
-end)
-local save = {}
-for i,v in next, workspace:GetChildren() do
-    if v:IsA'Model' then
-        if not game.Players:GetPlayerFromCharacter(v) then
-            save[#save + 1] = v
-        end
-    else
-        if v.ClassName == "Part" then
-            save[#save + 1] = v
-        end
-    end
-end
-for i,v in next, save do
-    v.Parent = game.Lighting
-end
-local BP = Instance.new("BodyPosition", game.Players.LocalPlayer.Character.HumanoidRootPart)
-BP.Position = Vector3.new(0, -4500, 0)
-BP.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-BP.P = 6000
-game.Players.LocalPlayer.CharacterAdded:Wait()
-game.Players.LocalPlayer.Character:WaitForChild'ForceField':Destroy()
-game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart').CFrame = saveCF
-connection:Disconnect()
-for i,v in next, save do
-    v.Parent = workspace
-end
-            end)
-        
-    end
-    if b then
-        local m = Instance.new("Message",workspace)
-        m.Text = "Cheese!"
-        wait(1)
-        m:Destroy()
-    end
 end})
 Admin2.addCommand({name = "fkill",desc = "Fast version of kill",callback = function(v,b)
     local t = Admin2.getplayers(v)
