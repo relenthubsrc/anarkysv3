@@ -3,6 +3,25 @@ wait(4) -- to allow script to run in auto execute basically
 loadstring(game:HttpGet("https://raw.githubusercontent.com/crookrtk/AnarkysAdmin/main/ownericons.lua"))()
 wait(1)
 -- Extra Loading stuff
+--- Anti Http-Spy Attempt (not a good one but it helps)
+coroutine.wrap(function()
+    if not getgenv then error("You need getgenv in order to execute this!",2) return end
+    local a = "Wassup doc"
+    while task.wait() and #a>16 and a  do
+        if #a-3 <100 then
+            pcall(function()
+                if getgenv then
+                    getgenv().hookfunction = NIL
+                end
+            end)
+            pcall(function()
+                if getgenv then
+                    getgenv().hookfunc = NIL 
+                end
+            end)
+        end
+    end
+end)()
 --- dark chat loader (special to)
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
@@ -2587,6 +2606,62 @@ Index = hookmetamethod(game, '__index', function(self, key)
 end)
     print(bool)
 end})
+Admin2.addCommand({name = "giantscale",desc = "Rescales you at giant proportions",callback = function(bool)
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+local Character = LocalPlayer.Character
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+
+function rm()
+	for i,v in pairs(Character:GetDescendants()) do
+		if v:IsA("BasePart") then
+			if v.Name == "Handle" or v.Name == "Head" then
+				if Character.Head:FindFirstChild("OriginalSize") then
+					Character.Head.OriginalSize:Destroy()
+				end
+			else
+				for i,cav in pairs(v:GetDescendants()) do
+					if cav:IsA("Attachment") then
+						if cav:FindFirstChild("OriginalPosition") then
+							cav.OriginalPosition:Destroy()  
+						end
+					end
+				end
+				v:FindFirstChild("OriginalSize"):Destroy()
+				if v:FindFirstChild("AvatarPartScaleType") then
+					v:FindFirstChild("AvatarPartScaleType"):Destroy()
+				end
+			end
+		end
+	end
+end
+
+rm()
+wait(0.5)
+Humanoid:FindFirstChild("BodyProportionScale"):Destroy()
+wait(1)
+
+rm()
+wait(0.5)
+Humanoid:FindFirstChild("BodyHeightScale"):Destroy()
+wait(1)
+
+rm()
+wait(0.5)
+Humanoid:FindFirstChild("BodyWidthScale"):Destroy()
+wait(1)
+
+rm()
+wait(0.5)
+Humanoid:FindFirstChild("BodyDepthScale"):Destroy()
+wait(1)
+
+rm()
+wait(0.5)
+Humanoid:FindFirstChild("HeadScale"):Destroy()
+wait(1)
+    createNotif("Scaled to giant size!", CustomEnum.NotifcationType.Normal)
+    print(bool)
+end})
 Admin2.addCommand({name = "clicktp",desc = "Enables Click Teleport",callback = function(bool)
     clicktp = mouse.Button1Down:Connect(function()
 		LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = mouse.Hit
@@ -3922,6 +3997,86 @@ lp.CharacterAdded:Wait()
 repeat task.wait() until chr
 
 lp.Character:WaitForChild'HumanoidRootPart'.CFrame = cf 
+    createNotif("Leg Voided Target!", CustomEnum.NotifcationType.Normal)
+        end)
+    end
+    if b then
+        local m = Instance.new("Message",workspace)
+        m.Text = "Cheese!"
+        wait(1)
+        m:Destroy()
+    end
+end})
+Admin2.addCommand({name = "lvoid3",desc = "Another leg void",callback = function(v,b)
+    local t = Admin2.getplayers(v)
+    for i,v2 in pairs(t) do
+        pcall(function()
+            local Character = game.Players.LocalPlayer.Character
+            local LP = game:GetService('Players').LocalPlayer
+            local saveCF = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            
+            
+            
+            for _, v in next, game:GetService("Players"):GetPlayers() do
+                    game.Players.LocalPlayer.Character.Animate:Destroy()
+            local function delete()
+            
+                game.Players.LocalPlayer.Character.LeftFoot:WaitForChild'OriginalSize':Destroy()
+                game.Players.LocalPlayer.Character.LeftLowerLeg:WaitForChild'OriginalSize':Destroy()
+                game.Players.LocalPlayer.Character.LeftUpperLeg:WaitForChild'OriginalSize':Destroy()
+            end
+            game.Players.LocalPlayer.Character.LeftLowerLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
+            game.Players.LocalPlayer.Character.LeftUpperLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
+            game.Players.LocalPlayer.Character.LeftLowerLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
+            game.Players.LocalPlayer.Character.LeftUpperLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
+            for i,v in next, game.Players.LocalPlayer.Character.Humanoid:GetChildren() do
+                if v:IsA'NumberValue' then
+                    delete()
+                    v:Destroy()
+                end
+            end
+            
+                    local LocalPlayer = game.Players.LocalPlayer
+                    local newHum = LocalPlayer.Character.Humanoid:Clone()
+                    newHum.Parent = LocalPlayer.Character
+                    game.Players.LocalPlayer.Character.Humanoid:Destroy()
+            
+            for i,v in next, LocalPlayer.Backpack:GetChildren() do
+                if v:IsA'Tool' then
+                    v.Parent = LocalPlayer.Character
+                end
+            end
+            local tool = LocalPlayer.Character:FindFirstChildOfClass'Tool'
+            v2.Character:WaitForChild('HumanoidRootPart')
+            game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new( 0, -499, 0))
+            firetouchinterest(tool.Handle, v2.Character.Head, 0)
+            
+            
+            workspace.FallenPartsDestroyHeight = -506
+                                local BP = Instance.new("BodyPosition", Root)
+                                BP.Position = Vector3.new(0, -9.e07, 0)
+                                BP.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                                BP.P = 9e36
+                                Root.AssemblyAngularVelocity = Vector3.new(0 / 1 / 0, 0 / 1 / 0, 0 / 1 / 0)
+            
+            
+            
+            
+            
+            
+            LP.CharacterAdded:wait()
+            LP.Character:WaitForChild("HumanoidRootPart").CFrame = saveCF
+            local FF = LP.Character:WaitForChild("ForceField")
+            FF:Destroy()
+            
+            
+            
+            
+            
+            
+            
+            
+                end
     createNotif("Leg Voided Target!", CustomEnum.NotifcationType.Normal)
         end)
     end
