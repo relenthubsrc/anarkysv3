@@ -4087,80 +4087,137 @@ Admin2.addCommand({name = "lvoid3",desc = "Another leg void",callback = function
         m:Destroy()
     end
 end})
-Admin2.addCommand({name = "mdvoid",desc = "Mass Depth Void",callback = function(v,b)
+Admin2.addCommand({name = "mdvoid",desc = "Mass Delay Void",callback = function(v,b)
     local t = Admin2.getplayers(v)
     for i,v2 in pairs(t) do
         pcall(function()
-            errorsound:Play()
-    createNotif("This command is currently broken, please wait for a fix!", CustomEnum.NotifcationType.Error)
-            settings()['Physics'].AllowSleep = false
-            settings()['Physics'].PhysicsEnvironmentalThrottle = Enum['EnviromentalPhysicsThrottle'].Disabled
-            setscriptable(v2.Character, "SimulationRadius", true)
-            local Char = game.Players.LocalPlayer.Character
-            game.Players.LocalPlayer.Character = Clone
-            game.Players.LocalPlayer.Character = Char
-            wait(4.25)
-            game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-            game.Players.LocalPlayer.Character.Humanoid.Sit = true
-            local function delete()
-                game.Players.LocalPlayer.Character.LeftFoot:WaitForChild'OriginalSize':Destroy()
-                game.Players.LocalPlayer.Character.LeftLowerLeg:WaitForChild'OriginalSize':Destroy()
-                game.Players.LocalPlayer.Character.LeftUpperLeg:WaitForChild'OriginalSize':Destroy()
-            end
-            game.Players.LocalPlayer.Character.LeftLowerLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
-            game.Players.LocalPlayer.Character.LeftUpperLeg.LeftKneeRigAttachment.OriginalPosition:Destroy()
-            game.Players.LocalPlayer.Character.LeftLowerLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
-            game.Players.LocalPlayer.Character.LeftUpperLeg:WaitForChild'LeftKneeRigAttachment':Destroy()
-            for i,v in next, game.Players.LocalPlayer.Character.Humanoid:GetChildren() do
-                if v:IsA'NumberValue' then
-                    delete()
-                    v:Destroy()
-                end
-            end
-            local saveCF = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            local LocalPlayer = game.Players.LocalPlayer
-            local newHum = LocalPlayer.Character.Humanoid:Clone()
-            newHum.Parent = LocalPlayer.Character
-            LocalPlayer.Character.Humanoid:Destroy()
-            for i,v in next, LocalPlayer.Backpack:GetChildren() do
-                if v:IsA'Tool' then
-                    v.Parent = LocalPlayer.Character
-                end
-            end
-            local tool = LocalPlayer.Character:FindFirstChildOfClass'Tool'
-            target.SimulationRadius = 0
-            firetouchinterest(tool.Handle, v2.Character.Head, 0)
-            local start
-            local connection = v2.Character.Humanoid.Died:Connect(function()
-                start = tick()
-                warn("Void successful! Took: " .. tick() - start)
-            end)
-            local save = {}
-            for i,v in next, workspace:GetChildren() do
-                if v:IsA'Model' then
-                    if not game.Players:GetPlayerFromCharacter(v) then
-                        save[#save + 1] = v
-                    end
-                else
-                    if v.ClassName == "Part" then
-                        save[#save + 1] = v
-                    end
-                end
-            end
-            for i,v in next, save do
-                v.Parent = game.Lighting
-            end
-            local BP = Instance.new("BodyPosition", game.Players.LocalPlayer.Character.HumanoidRootPart)
-            BP.Position = Vector3.new(0, -4500, 0)
-            BP.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            BP.P = 6000
-            game.Players.LocalPlayer.CharacterAdded:Wait()
-            game.Players.LocalPlayer.Character:WaitForChild'ForceField':Destroy()
-            game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart').CFrame = saveCF
-            connection:Disconnect()
-            for i,v in next, save do
-                v.Parent = workspace
-            end
+            
+
+local cfg = {
+    ["Mass"] = true;
+    ["FPDH"] = -504.5;
+    ["Stable"] = true;
+    ["Method"] = "LF" 
+};
+
+if cfg["Mass"] then
+    GetMass()
+end
+
+-- \\ variables
+
+local cf
+local ps = game:GetService("Players")
+local Client = ps.LocalPlayer
+local ClientChar = Client.Character
+local FPDH = workspace.FallenPartsDestroyHeight
+local RS = game:GetService("RunService").RenderStepped
+local rootpart = ClientChar.HumanoidRootPart
+local vf = Instance.new("VectorForce", ClientChar.PrimaryPart)
+local lf = Instance.new("LineForce", ClientChar.PrimaryPart)
+
+for i, v in next, ps:GetPlayers() do
+if v.Name:lower():sub(1, #Target) == Target:lower() or v.DisplayName:lower():sub(1, #Target) == Target then
+Humanoid = Client.Character.Humanoid:Clone()
+Tool = Client.Backpack:FindFirstChildOfClass("Tool")
+Humanoid:Clone().Parent = Character
+        
+        if cfg["Stable"] then
+        settings().Network.IncomingReplicationLag = 0
+        settings()["Physics"].AllowSleep = false
+        settings()["Physics"].PhysicsEnvironmentalThrottle = Enum["EnviromentalPhysicsThrottle"].Disabled
+        setscriptable(v, "SimulationRadius", true)
+        setscriptable(workspace, "StreamingTargetRadius", true)
+        setscriptable(workspace, "PhysicsSteppingMethod", true)
+        setscriptable(workspace, "StreamingMinRadius", true)
+        setscriptable(workspace, "StreamOutBehavior", true)
+        settings().Physics.PhysicsEnvironmentalThrottle = Enum.EnviromentalPhysicsThrottle.Disabled
+        workspace.InterpolationThrottling = Enum.InterpolationThrottlingMode.Disabled
+        workspace.PhysicsSteppingMethod = Enum.PhysicsSteppingMethod.Fixed
+        workspace.StreamOutBehavior = Enum.StreamOutBehavior.Opportunistic
+        sethiddenproperty(ps.LocalPlayer, "MaximumSimulationRadius", 1 / 0)
+        workspace.StreamingTargetRadius = 1 / 0
+        settings().Physics.AllowSleep = false
+        workspace.StreamingMinRadius = 1 / 0
+        workspace.StreamingEnabled = true
+        end
+        
+    if tostring(v["Character"]:WaitForChild("Humanoid")["SeatPart"]) == "Seat" then return Notify("Target is sitting") end
+    if not v["Character"]:FindFirstChild("RightHand") and not v["Character"]:FindFirstChild("Right Arm") then return Notify("Target has no right hand"); end
+    
+Humanoid:remove()
+cf = Client["Character"]["HumanoidRootPart"]["CFrame"]
+Client["Character"]["Humanoid"]:UnequipTools()
+Humanoid["BreakJointsOnDeath"] = false
+Client["Character"]["Humanoid"]:Destroy()
+Humanoid["Parent"] = Client["Character"]
+workspace["FallenPartsDestroyHeight"] = 0/0
+wait(4.5)
+Tool["Parent"] = Client["Character"]
+pcall(function()
+ClientChar["Humanoid"]:SetStateEnabled("FallingDown", false)
+ClientChar:SetPrimaryPartCFrame(CFrame.new(0, -498.9, 0))
+end)
+pcall(function() 
+ps.LocalPlayer["Character"]:SetPrimaryPartCFrame(CFrame.new(0, -498.9, 0))
+end)
+v["SimulationRadius"] = 0
+pcall(function() firetouchinterest(v2["Character"]["Head"], Tool["Handle"], 0)
+end)
+workspace["FallenPartsDestroyHeight"] = tonumber(cfg["FPDH"])
+workspace["CurrentCamera"]["CameraSubject"] = v["Character"]["Humanoid"]
+for i = 1, 0 / 1 do
+task.wait()
+end
+Tool["AncestryChanged"]:Connect(function(Target)
+if Target then
+pcall(function()
+if cfg.Method == "VF" then
+vf.ApplyAtCenterOfMass = true
+vf.Visible = true
+vf.Force = Vector3.new(0, -3e38, 0)
+vf.ApplyAtCenterOfMass = true
+vf.Enabled = true
+end
+
+if cfg.Method == "LF" then
+lf["MaxForce"] = Vector3.new(math.huge, math.huge, math.huge)
+lf["Magnitude"] = Vector3.new(9e9, 9e9, 9e9)
+end
+
+    
+pcall(function()
+local l1 = RS:Connect(function()
+rootpart["Velocity"] = Vector3.new(-25e25, -25e25, -25e25)
+end)
+local l2 = RS:Connect(function()
+rootpart["CFrame"] = v["Character"]["HumanoidRootPart"]["CFrame"] * CFrame["new"](0, -498, 0) + v["Character"]["HumanoidRootPart"]["Velocity"] / 0
+end)
+end)
+yield(1)
+end) end end) end end
+
+ 
+for I, V in pairs(ps.LocalPlayer.Backpack:GetDescendants()) do
+if V:FindFirstChild("Handle") then
+task.wait()
+V:Destroy()
+
+end
+end
+
+Client["CharacterAdded"]:wait()
+
+repeat
+RS:Wait()
+until ClientChar
+
+Client.Character:WaitForChild("HumanoidRootPart").CFrame = cf
+local ff = Client.Character:WaitForChild("ForceField")
+ff:Destroy()
+workspace.FallenPartsDestroyHeight = FPDH
+l1:Disconnect()
+l2:Disconnect()
         end)
     end
     if b then
